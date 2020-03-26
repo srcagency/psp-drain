@@ -8,7 +8,7 @@
 	"devDependencies": {
 		"pull-pushable": "^2.2.0",
 		"pull-stream": "^3.6.14",
-		"tape": "^4.11.0"
+		"tape": "^4.13.2"
 	},
 	"prettier": {
 		"semi": false,
