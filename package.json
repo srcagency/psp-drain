@@ -1,6 +1,6 @@
 {
 	"name": "psp-drain",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"repository": "srcagency/psp-drain",
 	"scripts": {
 		"test": "node test"
