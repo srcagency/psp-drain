@@ -14,22 +14,20 @@ function drain(op) {
 			drain()
 
 			function drain() {
-				let more = true
-				let looped = false
-				while (more) {
-					looped = false
-					more = false
-					read(ended, (end, data) => {
-						end = ended === null ? end : ended
-						if (end === true) return rs()
-						if (end) return rj(end)
-						if (op !== undefined && op(data) === false) ended = true
-						if (looped) return drain()
-						more = true
-					})
-
-					looped = true
-				}
+				read(ended, (end, data) => {
+					end = ended === null ? end : ended
+					if (end === true) return rs()
+					if (end) return rj(end)
+					Promise.resolve(op === undefined ? true : op(data)).then(
+						(r) => {
+							if (r === false) {
+								ended = true
+							}
+							return drain()
+						},
+						abort
+					)
+				})
 			}
 		})
 	}
